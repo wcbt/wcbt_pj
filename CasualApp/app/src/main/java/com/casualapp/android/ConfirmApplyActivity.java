@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConfirmApplyActivity extends AppCompatActivity {
+public class ConfirmApplyActivity extends BaseActivity {
 
     private TextView tvHotelName;
     private TextView tvJobTitle;

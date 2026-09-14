@@ -21,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyJobsActivity extends AppCompatActivity {
+public class MyJobsActivity extends BaseActivity {
 
     private RecyclerView rvApplications;
     private ApplicationAdapter adapter;

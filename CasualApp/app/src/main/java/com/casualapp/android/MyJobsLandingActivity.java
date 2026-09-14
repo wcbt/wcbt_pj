@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyJobsLandingActivity extends AppCompatActivity {
+public class MyJobsLandingActivity extends BaseActivity {
 
     private TextView tvBadgeCount;
     private LinearLayout rowApplications;

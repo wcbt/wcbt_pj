@@ -1,0 +1,25 @@
+# Local configuration files (developer-specific)
+**/LocalConfig.java
+
+# Java/Gradle
+.gradle
+build/
+*.class
+*.jar
+*.zip
+*.log
+
+# Android Studio
+.idea/
+*.iml
+*.iws
+*.swp
+local.properties
+
+# Backend Maven
+backend/target/
+backend/.mvn/wrapper/
+
+# OS
+.DS_Store
+Thumbs.db

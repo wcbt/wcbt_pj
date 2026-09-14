@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CoordinatorJobsActivity extends AppCompatActivity {
+public class CoordinatorJobsActivity extends BaseActivity {
 
     private LinearLayout jobsContainer;
     private ProgressBar progressBar;

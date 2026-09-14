@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat;
 import com.casualapp.android.model.Job;
 import com.casualapp.android.model.User;
 
-public class JobDetailActivity extends AppCompatActivity {
+public class JobDetailActivity extends BaseActivity {
 
     private TextView tvJobTitle;
     private TextView tvStatusBadge;

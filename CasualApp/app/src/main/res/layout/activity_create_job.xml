@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="工作列表"
+                android:text="@string/create_job"
                 android:textColor="@color/on_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="工作發佈"
+                android:text="@string/create_job"
                 android:textColor="@color/on_surface"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="工作地點"
+                android:text="@string/location"
                 android:textColor="@color/on_surface"
                 android:textSize="13sp" />
 
@@ -68,7 +68,7 @@
                 android:id="@+id/etWorkplace"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="請選擇 / 輸入工作地點"
+                android:hint="@string/location"
                 android:inputType="text"
                 android:paddingHorizontal="12dp"
                 android:layout_marginBottom="10dp" />
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="部門"
+                android:text="@string/job_details"
                 android:textColor="@color/on_surface"
                 android:textSize="13sp" />
 

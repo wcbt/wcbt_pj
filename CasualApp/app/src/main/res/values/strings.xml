@@ -1,3 +1,87 @@
 <resources>
     <string name="app_name">CasualApp</string>
+
+    <!-- Login Screen -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="login_subtitle">Sign in to your account to continue</string>
+    <string name="worker">Worker</string>
+    <string name="coordinator">Coordinator</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="phone_hint">Enter your phone number</string>
+    <string name="password_hint">Enter password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In →</string>
+    <string name="sign_in_loading">Signing in...</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="phone_required">Please enter a phone number</string>
+    <string name="password_recovery_not_implemented">Password recovery is not implemented yet</string>
+    <string name="network_error">Network failed: %s</string>
+    <string name="login_success">Welcome %s</string>
+    <string name="role_mismatch">Role mismatch: This account is %s</string>
+
+    <!-- Region Selection -->
+    <string name="select_region">Select Region</string>
+    <string name="hong_kong_island">Hong Kong Island</string>
+    <string name="kowloon">Kowloon</string>
+    <string name="new_territories">New Territories</string>
+
+    <!-- Job List -->
+    <string name="available_jobs">Available Jobs</string>
+    <string name="no_jobs">No jobs available</string>
+    <string name="apply">Apply</string>
+
+    <!-- Job Details -->
+    <string name="job_details">Job Details</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="pay_rate">Pay Rate</string>
+    <string name="select_shift">Select Shift</string>
+
+    <!-- My Jobs -->
+    <string name="my_jobs">My Jobs</string>
+    <string name="applications">Applications</string>
+    <string name="schedule">Schedule</string>
+    <string name="no_applications">No applications yet</string>
+
+    <!-- Schedule -->
+    <string name="my_schedule">My Schedule</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="completed">Completed</string>
+    <string name="no_upcoming_shifts">No upcoming shifts</string>
+    <string name="no_completed_shifts">No completed shifts</string>
+
+    <!-- Coordinator -->
+    <string name="coordinator_home">Coordinator Home</string>
+    <string name="create_job">Create Job</string>
+    <string name="manage_jobs">Manage Jobs</string>
+    <string name="record_attendance">Record Attendance</string>
+    <string name="applicants">Applicants</string>
+    <string name="approve">Approve</string>
+    <string name="reject">Reject</string>
+    <string name="present">Present</string>
+    <string name="late">Late</string>
+    <string name="no_show">No Show</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="chinese">中文 (Traditional Chinese)</string>
+    <string name="language_changed">Language changed</string>
+
+    <!-- Bottom Navigation -->
+    <string name="jobs">Jobs</string>
+    <string name="work_history">History</string>
+    <string name="profile">Profile</string>
+
+    <!-- General -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
+    <string name="loading">Loading...</string>
+    <string name="error">Error</string>
+    <string name="success">Success</string>
 </resources>

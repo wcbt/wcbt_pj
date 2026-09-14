@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:layout_marginBottom="24dp" />
+
+    <RadioGroup
+        android:id="@+id/languageGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioEnglish"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/english"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+        <RadioButton
+            android:id="@+id/radioChinese"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/chinese"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="8dp" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/save"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_segment_selected"
+        android:backgroundTint="@color/primary_dark"
+        android:textColor="@color/on_primary"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/back"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/primary"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -19,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class JobListActivity extends AppCompatActivity {
+public class JobListActivity extends BaseActivity {
 
     private RecyclerView rvJobs;
     private JobAdapter jobAdapter;

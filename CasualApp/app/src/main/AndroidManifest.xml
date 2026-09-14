@@ -64,6 +64,10 @@
 
         <activity android:name=".MyJobsLandingActivity" />
 
+        <activity
+            android:name=".LanguageSettingsActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

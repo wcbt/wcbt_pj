@@ -51,6 +51,25 @@ docker compose up -d
 
 Do not run this immediately before a demo unless a clean seed-data reset is intentional.
 
+### Switching seed data language
+
+The development database can be seeded with English or Traditional Chinese data. Edit `backend/src/main/resources/application-local.properties`:
+
+```properties
+app.seed.language=en  # English (default)
+app.seed.language=zh  # Traditional Chinese
+```
+
+Then reset the database to apply the new language:
+
+```powershell
+docker compose down -v
+docker compose up -d
+docker compose ps
+```
+
+The UI language (buttons, labels, navigation) is controlled separately through the app settings and does not depend on the seed data language. Job names, locations, and descriptions in the seed data will reflect your chosen language.
+
 ## Backend commands
 
 From `backend/`:

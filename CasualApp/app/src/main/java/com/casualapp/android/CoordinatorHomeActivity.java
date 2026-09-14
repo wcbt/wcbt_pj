@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.casualapp.android.model.User;
 
-public class CoordinatorHomeActivity extends AppCompatActivity {
+public class CoordinatorHomeActivity extends BaseActivity {
 
     private TextView tvWelcome;
 

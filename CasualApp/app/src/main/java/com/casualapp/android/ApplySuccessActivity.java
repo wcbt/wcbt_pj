@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.casualapp.android.model.Job;
 
-public class ApplySuccessActivity extends AppCompatActivity {
+public class ApplySuccessActivity extends BaseActivity {
 
     private TextView tvJobDetail;
 
