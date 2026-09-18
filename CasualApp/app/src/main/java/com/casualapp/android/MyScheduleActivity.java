@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyScheduleActivity extends AppCompatActivity {
+public class MyScheduleActivity extends BaseActivity {
 
     private static final long FALLBACK_WORKER_ID = 2L;
 
@@ -523,3 +523,4 @@ public class MyScheduleActivity extends AppCompatActivity {
         );
     }
 }
+

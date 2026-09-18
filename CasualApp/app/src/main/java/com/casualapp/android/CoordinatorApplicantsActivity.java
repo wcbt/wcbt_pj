@@ -33,7 +33,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CoordinatorApplicantsActivity
-        extends AppCompatActivity {
+        extends BaseActivity {
 
     private TextView btnBack;
     private TextView tvJobTitle;

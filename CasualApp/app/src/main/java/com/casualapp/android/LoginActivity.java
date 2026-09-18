@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
+import com.casualapp.android.config.LanguageManager;
 import com.casualapp.android.model.LoginRequest;
 import com.casualapp.android.model.User;
 import com.casualapp.android.network.RetrofitClient;
@@ -19,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private TextView btnWorker;
     private TextView btnEmployer;
@@ -48,10 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.tvForgotPassword).setOnClickListener(v ->
                 Toast.makeText(
                         this,
-                        "Password recovery is not implemented yet",
+                        getString(R.string.password_recovery_not_implemented),
                         Toast.LENGTH_SHORT
                 ).show()
         );
+
+        findViewById(R.id.tvAppTitle).setOnLongClickListener(v -> {
+            Intent settingsIntent = new Intent(LoginActivity.this, LanguageSettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        });
 
         setRole(true);
     }
@@ -112,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         if (phone.isEmpty()) {
-            etPhone.setError("請輸入電話號碼");
+            etPhone.setError(getString(R.string.phone_required));
             etPhone.requestFocus();
             return;
         }
@@ -154,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             Toast.makeText(
                                     LoginActivity.this,
-                                    "身份不匹配：此帳戶為 " + actualRole,
+                                    getString(R.string.role_mismatch, actualRole),
                                     Toast.LENGTH_LONG
                             ).show();
 
@@ -166,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Toast.makeText(
                                 LoginActivity.this,
-                                "歡迎 " + user.getName(),
+                                getString(R.string.login_success, user.getName()),
                                 Toast.LENGTH_SHORT
                         ).show();
 
@@ -197,8 +204,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Toast.makeText(
                                 LoginActivity.this,
-                                "Network failed: "
-                                        + throwable.getMessage(),
+                                getString(R.string.network_error, throwable.getMessage()),
                                 Toast.LENGTH_LONG
                         ).show();
                     }
@@ -207,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setLoginLoading(boolean loading) {
         btnLogin.setEnabled(!loading);
-        btnLogin.setText(loading ? "登入中..." : "登入");
+        btnLogin.setText(loading ? getString(R.string.sign_in_loading) : getString(R.string.sign_in));
     }
 
     private void showLoginError(Response<User> response) {

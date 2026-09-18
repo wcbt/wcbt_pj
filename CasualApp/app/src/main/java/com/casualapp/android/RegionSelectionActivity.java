@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
-public class RegionSelectionActivity extends AppCompatActivity {
+public class RegionSelectionActivity extends BaseActivity {
 
     private CheckBox cbKowloon;
     private CheckBox cbNewTerritories;

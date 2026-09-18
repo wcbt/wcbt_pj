@@ -32,7 +32,8 @@ public class DevDataSeeder {
             UserRepository userRepository,
             JobRepository jobRepository,
             JobSignupRepository jobSignupRepository,
-            JobAttendanceRepository jobAttendanceRepository
+            JobAttendanceRepository jobAttendanceRepository,
+            SeedDataConfig seedDataConfig
     ) {
         return args -> {
 
@@ -149,247 +150,22 @@ public class DevDataSeeder {
                     LocalDate.now()
                             .withDayOfMonth(1);
 
-            List<JobSeed> historicalSeeds = List.of(
-
-                    /*
-                     * Four months ago
-                     */
-                    new JobSeed(
-                            "Wedding Banquet Server",
-                            "Harbour View Hotel",
-                            "Wedding banquet dinner service.",
-                            4,
-                            5,
-                            17,
-                            0,
-                            6,
-                            "120.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Breakfast Buffet Server",
-                            "Central Hotel",
-                            "Breakfast buffet service and table reset.",
-                            4,
-                            11,
-                            7,
-                            0,
-                            5,
-                            "105.00",
-                            4,
-                            1
-                    ),
-
-                    new JobSeed(
-                            "Conference Setup Crew",
-                            "Metropark Hotel",
-                            "Conference room setup and guest support.",
-                            4,
-                            18,
-                            9,
-                            0,
-                            7,
-                            "110.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Cocktail Bartender",
-                            "Grand Harbour Hotel",
-                            "Evening cocktail reception service.",
-                            4,
-                            24,
-                            18,
-                            0,
-                            5,
-                            "140.00",
-                            4,
-                            1
-                    ),
-
-
-                    /*
-                     * Three months ago
-                     */
-                    new JobSeed(
-                            "Restaurant Server",
-                            "Kowloon City Hotel",
-                            "Dinner restaurant floor service.",
-                            3,
-                            4,
-                            17,
-                            30,
-                            6,
-                            "115.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Kitchen Helper",
-                            "Harbour View Hotel",
-                            "Food preparation and kitchen support.",
-                            3,
-                            10,
-                            15,
-                            0,
-                            7,
-                            "100.00",
-                            5,
-                            1
-                    ),
-
-                    new JobSeed(
-                            "Housekeeping Support",
-                            "Central Hotel",
-                            "Evening room turnover support.",
-                            3,
-                            17,
-                            14,
-                            0,
-                            6,
-                            "105.00",
-                            4,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Event Usher",
-                            "Convention Hotel",
-                            "Guest direction and event entrance support.",
-                            3,
-                            23,
-                            16,
-                            0,
-                            5,
-                            "100.00",
-                            5,
-                            1
-                    ),
-
-
-                    /*
-                     * Two months ago
-                     */
-                    new JobSeed(
-                            "Banquet Captain Assistant",
-                            "Grand Harbour Hotel",
-                            "Assist banquet captain during corporate dinner.",
-                            2,
-                            5,
-                            16,
-                            30,
-                            7,
-                            "130.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Poolside Server",
-                            "Seaview Hotel",
-                            "Poolside food and beverage service.",
-                            2,
-                            12,
-                            11,
-                            0,
-                            6,
-                            "115.00",
-                            4,
-                            1
-                    ),
-
-                    new JobSeed(
-                            "Afternoon Tea Server",
-                            "Peninsula Demo Hotel",
-                            "Afternoon tea guest service.",
-                            2,
-                            19,
-                            13,
-                            0,
-                            5,
-                            "125.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Catering Runner",
-                            "Convention Hotel",
-                            "Food running and catering logistics.",
-                            2,
-                            25,
-                            15,
-                            30,
-                            7,
-                            "110.00",
-                            5,
-                            1
-                    ),
-
-
-                    /*
-                     * Previous month
-                     */
-                    new JobSeed(
-                            "Wedding Reception Server",
-                            "Harbour View Hotel",
-                            "Wedding reception and dinner service.",
-                            1,
-                            4,
-                            17,
-                            0,
-                            6,
-                            "125.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Barback",
-                            "Central Hotel",
-                            "Bar stock, glassware and bartender support.",
-                            1,
-                            10,
-                            18,
-                            0,
-                            5,
-                            "110.00",
-                            4,
-                            1
-                    ),
-
-                    new JobSeed(
-                            "Stewarding Assistant",
-                            "Kowloon City Hotel",
-                            "Stewarding and banquet cleanup support.",
-                            1,
-                            17,
-                            16,
-                            0,
-                            7,
-                            "100.00",
-                            5,
-                            0
-                    ),
-
-                    new JobSeed(
-                            "Corporate Dinner Server",
-                            "Grand Harbour Hotel",
-                            "Corporate dinner banquet service.",
-                            1,
-                            24,
-                            17,
-                            30,
-                            6,
-                            "120.00",
-                            5,
-                            1
-                    )
-            );
+            List<JobSeed> historicalSeeds = seedDataConfig.getHistoricalJobs()
+                    .stream()
+                    .map(data -> new JobSeed(
+                            data.title,
+                            data.location,
+                            data.description,
+                            data.monthsAgo,
+                            data.dayOfMonth,
+                            data.startHour,
+                            data.startMinute,
+                            data.durationHours,
+                            data.hourlyRate,
+                            data.totalSlots,
+                            data.coordinatorIndex
+                    ))
+                    .toList();
 
 
             /*
