@@ -1,0 +1,352 @@
+package com.casualapp.android;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.casualapp.android.model.Job;
+import com.casualapp.android.model.SignupActionResponse;
+import com.casualapp.android.model.SignupRequest;
+import com.casualapp.android.model.User;
+import com.casualapp.android.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ConfirmApplyActivity extends BaseActivity {
+
+    private TextView tvHotelName;
+    private TextView tvJobTitle;
+    private TextView tvSlotMonth;
+    private TextView tvSlotDay;
+    private TextView tvSlotDate;
+    private TextView tvSlotTime;
+    private TextView tvSlotPrice;
+    private TextView tvSlotCount;
+
+    private AppCompatButton btnConfirm;
+
+    private Job job;
+    private User currentWorker;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_confirm_apply);
+
+        bindViews();
+
+        job = (Job) getIntent().getSerializableExtra("job");
+        currentWorker = UserSession.getCurrentUser();
+
+        if (job == null) {
+            Toast.makeText(
+                    this,
+                    "Job not found",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            finish();
+            return;
+        }
+
+        if (!isWorker(currentWorker)) {
+            Toast.makeText(
+                    this,
+                    "請先以員工帳戶登入",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            returnToLogin();
+            return;
+        }
+
+        bindData();
+
+        ImageButton btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+
+        btnConfirm.setOnClickListener(v -> submitApplication());
+    }
+
+    private void bindViews() {
+        tvHotelName = findViewById(R.id.tvHotelName);
+        tvJobTitle = findViewById(R.id.tvJobTitle);
+        tvSlotMonth = findViewById(R.id.tvSlotMonth);
+        tvSlotDay = findViewById(R.id.tvSlotDay);
+        tvSlotDate = findViewById(R.id.tvSlotDate);
+        tvSlotTime = findViewById(R.id.tvSlotTime);
+        tvSlotPrice = findViewById(R.id.tvSlotPrice);
+        tvSlotCount = findViewById(R.id.tvSlotCount);
+        btnConfirm = findViewById(R.id.btnConfirm);
+    }
+
+    private void bindData() {
+        tvHotelName.setText(
+                safeText(job.getLocation(), "地點待定")
+        );
+
+        tvJobTitle.setText(
+                safeText(job.getTitle(), "未命名職位")
+        );
+
+        String startDateTime =
+                job.getStartDateTime();
+
+        String endDateTime =
+                job.getEndDateTime();
+
+        tvSlotMonth.setText(
+                JobDateFormatter.formatMonth(startDateTime)
+        );
+
+        tvSlotDay.setText(
+                JobDateFormatter.formatDay(startDateTime)
+        );
+
+        tvSlotDate.setText(
+                JobDateFormatter.formatFullDate(startDateTime)
+        );
+
+        tvSlotTime.setText(
+                formatTimeRange(
+                        startDateTime,
+                        endDateTime
+                )
+        );
+
+        if (job.getHourlyRate() != null) {
+
+        tvSlotPrice.setVisibility(View.VISIBLE);
+
+        tvSlotPrice.setText(
+                "HK$"
+                        + job.getHourlyRate()
+                                .stripTrailingZeros()
+                                .toPlainString()
+                        + "/hr"
+        );
+
+        } else {
+
+        tvSlotPrice.setVisibility(View.GONE);
+        }
+
+        tvSlotCount.setText("共 1 個工作時段");
+    }
+
+    private void submitApplication() {
+        currentWorker = UserSession.getCurrentUser();
+
+        if (!isWorker(currentWorker)) {
+            Toast.makeText(
+                    this,
+                    "登入已失效，請重新登入",
+                    Toast.LENGTH_LONG
+            ).show();
+
+            returnToLogin();
+            return;
+        }
+
+        if (job.getId() == null) {
+            Toast.makeText(
+                    this,
+                    "Invalid job ID",
+                    Toast.LENGTH_LONG
+            ).show();
+            return;
+        }
+
+        if (!job.isOpen() || !job.hasAvailableSlots()) {
+            Toast.makeText(
+                    this,
+                    "此職位目前不可申請",
+                    Toast.LENGTH_LONG
+            ).show();
+            return;
+        }
+
+        setSubmitting(true);
+
+        RetrofitClient.getApiService()
+                .signUp(
+                        new SignupRequest(
+                                currentWorker.getId(),
+                                job.getId()
+                        )
+                )
+                .enqueue(new Callback<>() {
+
+                    @Override
+                    public void onResponse(
+                            Call<SignupActionResponse> call,
+                            Response<SignupActionResponse> response
+                    ) {
+                        setSubmitting(false);
+
+                        if (!response.isSuccessful()
+                                || response.body() == null) {
+
+                            showError(response);
+                            return;
+                        }
+
+                        SignupActionResponse createdSignup = response.body();
+
+                        Intent intent = new Intent(
+                                ConfirmApplyActivity.this,
+                                ApplySuccessActivity.class
+                        );
+
+                        intent.putExtra("job", job);
+
+                        if (createdSignup.getId() != null) {
+                            intent.putExtra(
+                                    "signupId",
+                                    createdSignup.getId()
+                            );
+                        }
+
+                        intent.putExtra(
+                                "signupStatus",
+                                createdSignup.getStatus()
+                        );
+
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(
+                            Call<SignupActionResponse> call,
+                            Throwable throwable
+                    ) {
+                        setSubmitting(false);
+
+                        Toast.makeText(
+                                ConfirmApplyActivity.this,
+                                "Network failed: "
+                                        + throwable.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
+                });
+    }
+
+    private void setSubmitting(boolean submitting) {
+        btnConfirm.setEnabled(!submitting);
+        btnConfirm.setText(
+                submitting ? "提交中..." : "確認"
+        );
+    }
+
+    private void showError(Response<?> response) {
+        try {
+            String message = response.errorBody() != null
+                    ? response.errorBody().string()
+                    : "Apply failed";
+
+            Toast.makeText(
+                    this,
+                    message,
+                    Toast.LENGTH_LONG
+            ).show();
+
+        } catch (Exception exception) {
+            Toast.makeText(
+                    this,
+                    "Apply error: " + response.code(),
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+    }
+
+    private boolean isWorker(User user) {
+        return user != null
+                && user.getRole() != null
+                && "WORKER".equals(user.getRole().name());
+    }
+
+    private void returnToLogin() {
+        UserSession.clear();
+
+        Intent intent = new Intent(
+                this,
+                LoginActivity.class
+        );
+
+        intent.addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+
+        startActivity(intent);
+        finish();
+    }
+
+        private String formatTimeRange(
+                String startDateTime,
+                String endDateTime
+        ) {
+
+        String startTime =
+                extractTime(startDateTime);
+
+        String endTime =
+                extractTime(endDateTime);
+
+        if (startTime == null
+                && endTime == null) {
+
+                return "時間待定";
+        }
+
+        if (startTime != null
+                && endTime == null) {
+
+                return startTime + " 開始";
+        }
+
+        if (startTime == null) {
+                return endTime + " 結束";
+        }
+
+        return startTime
+                + " - "
+                + endTime;
+        }
+
+        private String extractTime(
+                String dateTime
+        ) {
+
+        if (dateTime == null
+                || dateTime.length() < 16) {
+
+                return null;
+        }
+
+        try {
+                return dateTime.substring(
+                        11,
+                        16
+                );
+        } catch (IndexOutOfBoundsException e) {
+                return null;
+        }
+        }
+
+    private String safeText(String value, String fallback) {
+        return value == null || value.isBlank()
+                ? fallback
+                : value;
+    }
+}

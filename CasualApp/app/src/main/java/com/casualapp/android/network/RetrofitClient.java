@@ -1,5 +1,6 @@
 package com.casualapp.android.network;
 
+import com.casualapp.android.config.LocalConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    private static final String BASE_URL = "http://10.0.2.2:8081/";
+    private static final String BASE_URL = LocalConfig.API_BASE_URL;
     private static Retrofit retrofit;
 
     public static ApiService getApiService() {

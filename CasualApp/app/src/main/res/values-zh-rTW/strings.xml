@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CasualApp</string>
+
+    <!-- Login Screen -->
+    <string name="welcome_back">歡迎回來</string>
+    <string name="login_subtitle">請登入您的帳戶以繼續使用</string>
+    <string name="worker">員工</string>
+    <string name="coordinator">雇主</string>
+    <string name="phone_number">電話號碼</string>
+    <string name="password">密碼</string>
+    <string name="phone_hint">輸入您的電話號碼</string>
+    <string name="password_hint">輸入密碼</string>
+    <string name="forgot_password">忘記密碼？</string>
+    <string name="sign_in">登入 →</string>
+    <string name="sign_in_loading">登入中...</string>
+    <string name="privacy_policy">隱私政策</string>
+    <string name="terms_of_service">服務條款</string>
+    <string name="phone_required">請輸入電話號碼</string>
+    <string name="password_recovery_not_implemented">密碼恢復功能尚未實現</string>
+    <string name="network_error">網絡錯誤: %s</string>
+    <string name="login_success">歡迎 %s</string>
+    <string name="role_mismatch">身份不匹配：此帳戶為 %s</string>
+
+    <!-- Region Selection -->
+    <string name="select_region">選擇地區</string>
+    <string name="hong_kong_island">香港島</string>
+    <string name="kowloon">九龍</string>
+    <string name="new_territories">新界</string>
+
+    <!-- Job List -->
+    <string name="available_jobs">可用工作</string>
+    <string name="no_jobs">沒有可用的工作</string>
+    <string name="apply">申請</string>
+
+    <!-- Job Details -->
+    <string name="job_details">工作詳情</string>
+    <string name="location">位置</string>
+    <string name="date">日期</string>
+    <string name="time">時間</string>
+    <string name="pay_rate">時薪</string>
+    <string name="select_shift">選擇班次</string>
+
+    <!-- My Jobs -->
+    <string name="my_jobs">我的工作</string>
+    <string name="applications">申請</string>
+    <string name="schedule">日程表</string>
+    <string name="no_applications">還沒有申請</string>
+
+    <!-- Schedule -->
+    <string name="my_schedule">我的日程表</string>
+    <string name="upcoming">即將進行</string>
+    <string name="completed">已完成</string>
+    <string name="no_upcoming_shifts">沒有即將進行的班次</string>
+    <string name="no_completed_shifts">沒有已完成的班次</string>
+
+    <!-- Coordinator -->
+    <string name="coordinator_home">雇主首頁</string>
+    <string name="create_job">創建工作</string>
+    <string name="manage_jobs">管理工作</string>
+    <string name="record_attendance">記錄出席</string>
+    <string name="applicants">申請人</string>
+    <string name="approve">批准</string>
+    <string name="reject">拒絕</string>
+    <string name="present">出席</string>
+    <string name="late">遲到</string>
+    <string name="no_show">缺席</string>
+
+    <!-- Settings -->
+    <string name="settings">設置</string>
+    <string name="language">語言</string>
+    <string name="english">English</string>
+    <string name="chinese">中文 (繁體中文)</string>
+    <string name="language_changed">語言已更改</string>
+
+    <!-- Bottom Navigation -->
+    <string name="jobs">工作列表</string>
+    <string name="work_history">工作記錄</string>
+    <string name="profile">個人檔案</string>
+
+    <!-- General -->
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="back">返回</string>
+    <string name="loading">加載中...</string>
+    <string name="error">錯誤</string>
+    <string name="success">成功</string>
+</resources>
